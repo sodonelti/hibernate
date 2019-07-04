@@ -1,49 +1,47 @@
 package com.lti.entity;
 
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-@Entity
-@Table(name = "TBL_PAYMENT")
-public class Payment {
+import org.hibernate.annotations.Generated;
 
+@Entity
+@Table(name= "TBL_PAY")
+public class Payment {
 	@Id
-	@GeneratedValue
-	@Column(name = "PAYMENT_ID")
-	private int id;
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	private int pay_id;
+	private Double amount;
+	private String modeOfPayment;
+	private String statusOfTransaction;
+	public String getModeOfPayment() {
+		return modeOfPayment;
+	}
+	public void setModeOfPayment(String modeOfPayment) {
+		this.modeOfPayment = modeOfPayment;
+	}
 	
-	private int amount;
-	private String mod;
-	private String Status;
-	public int getId() {
-		return id;
+	public String getStatusOfTransaction() {
+		return statusOfTransaction;
 	}
-	public void setId(int id) {
-		this.id = id;
+	public void setStatusOfTransaction(String statusOfTransaction) {
+		this.statusOfTransaction = statusOfTransaction;
 	}
-	public int getAmount() {
+	public int getPay_id() {
+		return pay_id;
+	}
+	public void setPay_id(int pay_id) {
+		this.pay_id = pay_id;
+	}
+	public Double getAmount() {
 		return amount;
 	}
-	public void setAmount(int amount) {
+	public void setAmount(Double amount) {
 		this.amount = amount;
 	}
-	public String getMod() {
-		return mod;
-	}
-	public void setMod(String mod) {
-		this.mod = mod;
-	}
-	public String getStatus() {
-		return Status;
-	}
-	public void setStatus(String status) {
-		Status = status;
-	}
-	public Customer getOrder() {
-		return null;
-	}
 	
+
 }

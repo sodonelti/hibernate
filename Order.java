@@ -5,33 +5,30 @@ import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
-@Entity
-@Table(name =  "TBL_ORDER")
-public class Order {
 
+@Entity
+@Table(name = "TBL_ORDER")
+public class Order {
+	
 	@Id
-	@GeneratedValue
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "ORDER_ID")
-	private int id; // order id
+	private int id;
 	
 	private Date orderDate;
 	private double amount;
 	
-	//one customer having many orders
 	@ManyToOne
-	@JoinColumn(name = "CUST_ID") //foreign key
-	private Customer customer; // for keeping the customer id
+	@JoinColumn(name= "cust_id") //Foreign Key
+	private Customer customer;
 	
-	@OneToOne
-	@JoinColumn(name = "PAYMENT_ID")
-	private Payment payment;
-
 	public Payment getPayment() {
 		return payment;
 	}
@@ -40,6 +37,15 @@ public class Order {
 		this.payment = payment;
 	}
 
+	@OneToOne
+	@JoinColumn(name="pay_id")//Foreign key 
+	private Payment payment;
+
+	/*
+	 * This is how ORM is carried out, this shows that the Order class
+	 * is linked to the customer class. The column "cust_id" is the link.
+	 */
+	
 	public int getId() {
 		return id;
 	}
@@ -71,7 +77,6 @@ public class Order {
 	public void setCustomer(Customer customer) {
 		this.customer = customer;
 	}
-	
 	
 	
 }
